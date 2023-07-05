@@ -1,0 +1,120 @@
+body {
+    margin-top: 7%;
+}
+
+a {
+    cursor: pointer;
+}
+
+#shopCart {
+    margin-left: 10%;
+}
+
+#welcome {
+    font-size: xx-large;
+    padding-left: 3%;
+}
+
+#prodContainer {
+    margin: auto;
+    height: 95%;
+    width: 95%;
+}
+
+.prodCard {
+    margin-bottom: 7%;
+}
+
+.card img {
+    align-self: center;
+    justify-self: center;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.prodFooter{
+    max-height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.price{
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.modal {
+    display: none;
+    /* Por defecto, estará oculto */
+    position: fixed;
+    /* Posición fija */
+    z-index: 1;
+    /* Se situará por encima de otros elementos de la página*/
+    padding-top: 90px;
+    /* El contenido estará situado a 200px de la parte superior */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Ancho completo */
+    height: 100%;
+    /* Algura completa */
+    overflow: auto;
+    /* Se activará el scroll si es necesario */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Color negro con opacidad del 50% */
+}
+
+.modal-content {
+    position: relative;
+    /* Relativo con respecto al contenedor -modal- */
+    background-color: white;
+    margin: auto;
+    /* Centrada */
+    padding: 20px;
+    width: 40%;
+    -webkit-animation-name: animarsuperior;
+    -webkit-animation-duration: 0.5s;
+    animation-name: animarsuperior;
+    animation-duration: 0.5s
+}
+
+.divProdCart{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 100px;
+    margin-bottom: 2%;
+}
+
+.divProdCart img{
+    align-self: center;
+    justify-self: center;
+    height: 95px;
+    width: 95px;
+    object-fit: cover;
+    margin-right: -80px;
+}
+
+.prodCartBtn {
+    display: block;
+}
+
+.divProdCart p{
+    margin: 0;
+    padding: 0;
+    font-size: medium;
+}
+
+#cartTotal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -20px;
+    padding: 0px 40px 0px 40px;
+}
+
+#cartTotal p, .modal-title{
+    font-size: larger;
+}
