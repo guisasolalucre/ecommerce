@@ -126,9 +126,9 @@ function literalToProduct(list) {
 }
 
 /* checkear si el producto tiene stock */
-function checkStock(product) {
+function checkStock(prod, prodInCart) {
 
-    if (product.stock > 0 && (product.quantity < product.stock)) {
+    if (prod.stock > 0 && (prodInCart.quantity < prod.stock)) {
         return true
     } else {
         alert("NO HAY SUFICIENTE STOCK")
@@ -149,7 +149,7 @@ function getCart() {
 }
 
 /* mostrar el modal de carrito */
-function showCart(list) {
+function showCart() {
 
     // cantidad de articulos diferentes en el carrito
     cartQuantity.innerText = shopCart.length
@@ -166,7 +166,7 @@ function showCart(list) {
     } else {
         cartHTML.innerHTML = "";
 
-        for (const prod of list) {
+        for (const prod of shopCart) {
             let divProd = document.createElement("div");
 
             divProd.innerHTML += `  <div class="divProdCart">
@@ -178,7 +178,7 @@ function showCart(list) {
                                     <p><strong>${prod.name}</strong></p>
                                     <p>Cantidad: ${prod.quantity}</p> 
                                     <p>Precio: $${prod.price}</p>
-                                    <p>Subtotal: $` + (prod.price * prod.quantity) + `</p>
+                                    <p>Subtotal: $` + prod.price*prod.quantity + `</p>
                                 </div>
 
                                 <div class="prodCartBtn d-grid gap-1">
@@ -206,19 +206,21 @@ function showCart(list) {
 /* agregar al carrito */
 function addToCart(id) {
 
-    let prod = findById(id, allProd)
+    const prod = findById(id, allProd)
 
-    const cart = getCart()
-
-    if (cart.some((p) => p.id === prod.id)) {
-        if (checkStock(prod)) {
-            prod.quantity++
+    if (shopCart.some((p) => p.id === prod.id)) {
+        prodInCart = findById(id, shopCart)
+        if (checkStock(prod, prodInCart)) {
+            prodInCart.quantity++
             alert("Producto agregado al carrito")
         }
     } else {
-        if (checkStock(prod)) {
-            shopCart.push(prod)
-            prod.quantity++
+        prodInCart = {...prod}
+        prodInCart.quantity++
+        console.log(prod)
+        console.log(prodInCart)
+        if (checkStock(prod, prodInCart)) {
+            shopCart.push(prodInCart)
             alert("Producto agregado al carrito")
         }
     }
@@ -229,7 +231,7 @@ function addToCart(id) {
     /* guarda el carrito (en json) en el localstorage */
     localStorage.setItem("ShopCart", JSON.stringify(shopCart))
 
-    showCart(shopCart)
+    showCart()
 
 }
 
@@ -243,7 +245,7 @@ function deleteFromCart(id) {
     shopCart.splice(position, 1);
 
     //actualiza la vista del carrito
-    showCart(shopCart)
+    showCart()
 
     /* actualiza la cantidad del carrito */
     cartQuantity.innerText = shopCart.length
@@ -251,9 +253,6 @@ function deleteFromCart(id) {
     /* guarda el carrito (en json) en el localstorage */
     localStorage.setItem("ShopCart", JSON.stringify(shopCart))
 
-    if (shopCart.length === 0) {
-        localStorage.removeItem("ShopCart")
-    }
 }
 
 /* resta una unidad producto al carrito */
@@ -265,7 +264,7 @@ function subFromCart(id) {
         prodInCart.quantity--;
 
         //actualiza la vista del carrito
-        showCart(shopCart)
+        showCart()
 
         /* actualiza la cantidad del carrito */
         cartQuantity.innerText = shopCart.length

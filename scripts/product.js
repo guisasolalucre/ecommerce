@@ -8,6 +8,6 @@ class Product {
         this.categorie = categorie;
         this.picture = picture;
         this.stock = stock;
-        this.quantity = 0;
+        this.quantity = quantity || 0;
     }
 }
