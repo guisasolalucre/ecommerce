@@ -138,6 +138,19 @@ function checkStock(prod, prodInCart) {
 
 /*---------------------------------------------------------------------------------------*/
 // FUNCIONES RELACIONADAS AL CARRITO
+/* muestra la toast del prod agregado al carrito*/
+function toastAddedToCart(name) {
+    Toastify({
+        text: "Se agregó una unidad de " + name + " al carrito",
+        duration: 2000,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        style: {
+            background: "#474747",
+          },
+    }).showToast();
+}
 
 /* trae el carrito del localstorage */
 function getCart() {
@@ -178,7 +191,7 @@ function showCart() {
                                     <p><strong>${prod.name}</strong></p>
                                     <p>Cantidad: ${prod.quantity}</p> 
                                     <p>Precio: $${prod.price}</p>
-                                    <p>Subtotal: $` + prod.price*prod.quantity + `</p>
+                                    <p>Subtotal: $` + prod.price * prod.quantity + `</p>
                                 </div>
 
                                 <div class="prodCartBtn d-grid gap-1">
@@ -211,17 +224,17 @@ function addToCart(id) {
     if (shopCart.some((p) => p.id === prod.id)) {
         prodInCart = findById(id, shopCart)
         if (checkStock(prod, prodInCart)) {
-            prodInCart.quantity++
-            alert("Producto agregado al carrito")
+            prodInCart.quantity++,
+            toastAddedToCart(prod.name)
         }
     } else {
-        prodInCart = {...prod}
+        prodInCart = { ...prod }
         prodInCart.quantity++
         console.log(prod)
         console.log(prodInCart)
         if (checkStock(prod, prodInCart)) {
-            shopCart.push(prodInCart)
-            alert("Producto agregado al carrito")
+            shopCart.push(prodInCart),
+            toastAddedToCart(prod.name)
         }
     }
 
@@ -238,11 +251,22 @@ function addToCart(id) {
 /* elimina el producto del carrito */
 function deleteFromCart(id) {
 
-    let prod = findById(id, allProd);
-    prod.quantity = 0
+    let prodInCart = findById(id, shopCart);
+    prodInCart.quantity = 0
 
     let position = shopCart.findIndex(prod => prod.id == id);
     shopCart.splice(position, 1);
+
+    Toastify({
+        text: `${prodInCart.name} se eliminó del carrito`,
+        duration: 2000,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        style: {
+            background: "#474747",
+          },
+    }).showToast();
 
     //actualiza la vista del carrito
     showCart()
@@ -265,6 +289,17 @@ function subFromCart(id) {
 
         //actualiza la vista del carrito
         showCart()
+
+        Toastify({
+            text: `Se restó una unidad de ${prodInCart.name}`,
+            duration: 2000,
+            close: true,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "#474747",
+              },
+        }).showToast();
 
         /* actualiza la cantidad del carrito */
         cartQuantity.innerText = shopCart.length
