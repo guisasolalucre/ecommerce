@@ -29,10 +29,11 @@ searchHTML.addEventListener("input", function () {
             showProducts(filter)
             welcomeHTML.innerText = "Resultado de la búsqueda"
         } else {
-            prodListHTML.innerHTML = `<p>No hay productos que coincidan con la búsqueda</p>`
+            divProdHTML.innerHTML = `<p>No hay productos que coincidan con la búsqueda</p>`
         }
     }
 })
+
 
 /* modal carrito */
 const cartModalHTML = document.getElementById("cartModal");
@@ -63,4 +64,4 @@ window.addEventListener("click", function (event) {
 const buyBtn = document.getElementById("buyBtn");
 buyBtn.addEventListener("click", function() {
     finishBuying();
-  })
+})

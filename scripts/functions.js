@@ -8,6 +8,10 @@ function showProducts(list) {
 
     showWelcome(list)
 
+    divProdHTML.innerHTML = `<div class="row row-cols-4" id="prodList"></div>`
+
+    const prodListHTML = document.getElementById("prodList")    
+
     prodListHTML.innerHTML = ""
     for (const product of list) {
         let container = document.createElement("div");

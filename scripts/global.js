@@ -18,7 +18,6 @@ const welcomeHTML = document.getElementById("welcome");
 
 /* div de productos en el body */
 const divProdHTML = document.getElementById("prodContainer")
-const prodListHTML = document.getElementById("prodList")
 
 /* ul (lista) desplegable donde se muestran las categorias en la navbar */
 const categoriesHTML = document.getElementById("categories");
