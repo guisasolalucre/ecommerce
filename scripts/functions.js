@@ -131,7 +131,16 @@ function checkStock(prod, prodInCart) {
     if (prod.stock > 0 && (prodInCart.quantity < prod.stock)) {
         return true
     } else {
-        alert("NO HAY SUFICIENTE STOCK")
+        Toastify({
+            text: `No hay suficiente stock\nNo se pudo agregar '${prod.name}' al carrito`,
+            duration: 2000,
+            close: true,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "#ff0000",
+            },
+        }).showToast();
         return false
     }
 }
@@ -141,7 +150,7 @@ function checkStock(prod, prodInCart) {
 /* muestra la toast del prod agregado al carrito*/
 function toastAddedToCart(name) {
     Toastify({
-        text: "Se agregó una unidad de " + name + " al carrito",
+        text: "Se agregó una unidad de '" + name + "' al carrito",
         duration: 2000,
         close: true,
         gravity: "bottom",
@@ -258,7 +267,7 @@ function deleteFromCart(id) {
     shopCart.splice(position, 1);
 
     Toastify({
-        text: `${prodInCart.name} se eliminó del carrito`,
+        text: `'${prodInCart.name}' se eliminó del carrito`,
         duration: 2000,
         close: true,
         gravity: "bottom",
@@ -291,7 +300,7 @@ function subFromCart(id) {
         showCart()
 
         Toastify({
-            text: `Se restó una unidad de ${prodInCart.name}`,
+            text: `Se restó una unidad de '${prodInCart.name}'`,
             duration: 2000,
             close: true,
             gravity: "bottom",
@@ -312,15 +321,31 @@ function subFromCart(id) {
 /* terminar la compra */
 /* falta toda la parte de modificar el back */
 function finishBuying() {
-    localStorage.removeItem("ShopCart")
+    if (shopCart.length > 0) {
+        localStorage.clear()
 
-    //sweetalert
-    Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Gracias por tu compra!',
-        showConfirmButton: false,
-        timer: 2000
-    })
+        shopCart.splice(0, shopCart.length)
+
+        //sweetalert
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Gracias por tu compra!',
+            showConfirmButton: false,
+            timer: 2000
+        })
+
+        cartModalHTML.style.display = "none";
+
+        setTimeout("location.reload()", 2000)
+
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'El carrito está vacío',
+            text: 'Agregá productos a tu carrito para poder realizar la compra',
+            confirmButtonText: 'Seguir comprando',
+        })
+    }
 }
 

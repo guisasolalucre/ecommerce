@@ -53,6 +53,4 @@ window.addEventListener("click", function (event) {
 const buyBtn = document.getElementById("buyBtn");
 buyBtn.addEventListener("click", function() {
     finishBuying();
-    cartModalHTML.style.display = "none";
-    setTimeout("location.reload()", 2000)
-})
+  })
