@@ -72,19 +72,6 @@ function findById(id, list) {
     return list.find(x => x.id == id)
 }
 
-/* ordena una lista en orden alfabetico o de menor a mayor */
-function orderList(list) {
-    list.sort((a, b) => {
-        if (a > b) {
-            return 1;
-        }
-        if (a < b) {
-            return -1;
-        }
-        return 0
-    })
-}
-
 /* crea el array de categorias desde el array de los productos */
 function getCategories(list) {
     /* mapea las categorias desde el array de productos */
@@ -100,7 +87,15 @@ function getCategories(list) {
         }
     });
 
-    orderList(categories)
+    categories.sort((a, b) => {
+        if (a > b) {
+            return 1;
+        }
+        if (a < b) {
+            return -1;
+        }
+        return 0
+    })
 
     return categories
 }

@@ -15,7 +15,17 @@ searchHTML.addEventListener("input", function () {
     }
     else {
         const filter = allProd.filter(prod => prod.name.toLowerCase().includes(this.value.toLowerCase()))
+
         if (filter.length > 0) {
+            filter.sort((a, b) => {
+                if (a.name > b.name) {
+                    return 1;
+                }
+                if (a.name < b.name) {
+                    return -1;
+                }
+                return 0
+            })
             showProducts(filter)
             welcomeHTML.innerText = "Resultado de la búsqueda"
         } else {
