@@ -54,5 +54,5 @@ const buyBtn = document.getElementById("buyBtn");
 buyBtn.addEventListener("click", function() {
     finishBuying();
     cartModalHTML.style.display = "none";
-    location.reload()
+    setTimeout("location.reload()", 2000)
 })

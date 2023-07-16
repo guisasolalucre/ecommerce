@@ -148,7 +148,7 @@ function toastAddedToCart(name) {
         position: "right",
         style: {
             background: "#474747",
-          },
+        },
     }).showToast();
 }
 
@@ -225,7 +225,7 @@ function addToCart(id) {
         prodInCart = findById(id, shopCart)
         if (checkStock(prod, prodInCart)) {
             prodInCart.quantity++,
-            toastAddedToCart(prod.name)
+                toastAddedToCart(prod.name)
         }
     } else {
         prodInCart = { ...prod }
@@ -234,7 +234,7 @@ function addToCart(id) {
         console.log(prodInCart)
         if (checkStock(prod, prodInCart)) {
             shopCart.push(prodInCart),
-            toastAddedToCart(prod.name)
+                toastAddedToCart(prod.name)
         }
     }
 
@@ -265,7 +265,7 @@ function deleteFromCart(id) {
         position: "right",
         style: {
             background: "#474747",
-          },
+        },
     }).showToast();
 
     //actualiza la vista del carrito
@@ -298,7 +298,7 @@ function subFromCart(id) {
             position: "right",
             style: {
                 background: "#474747",
-              },
+            },
         }).showToast();
 
         /* actualiza la cantidad del carrito */
@@ -313,6 +313,14 @@ function subFromCart(id) {
 /* falta toda la parte de modificar el back */
 function finishBuying() {
     localStorage.removeItem("ShopCart")
-    alert("Gracias por tu compra")
+
+    //sweetalert
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Gracias por tu compra!',
+        showConfirmButton: false,
+        timer: 2000
+    })
 }
 
