@@ -195,7 +195,7 @@ function showCart() {
                                     <img src="${prod.picture}" alt="${prod.name}">
                                 </div>
 
-                                <div class="prodInCartDetail">
+                                <div>
                                     <p><strong>${prod.name}</strong></p>
                                     <p>Cantidad: ${prod.quantity}</p> 
                                     <p>Precio: $${prod.price}</p>
