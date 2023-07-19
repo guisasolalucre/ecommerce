@@ -1,9 +1,23 @@
-/* MUESTRA TODOS LOS PRODUCTOS */
-showProducts(allProd)
+fetch('data/data.json')
+    .then((response) => response.json())
+    .then((data) => {
 
-/* crea el desplegable de categorias */
-/* manda la lista de categorias ya filtradas */
-createDropdownItem(categoriesList, "categorie")
+        data.forEach(literal => {
+            allProd.push(literalToProduct(literal))
+        });
+
+        /* MUESTRA TODOS LOS PRODUCTOS */
+        showProducts(allProd)
+
+        categoriesList = getCategories(allProd)
+
+        /* crea el desplegable de categorias */
+        /* manda la lista de categorias ya filtradas */
+        createDropdownItem(categoriesList, "categorie")
+    })
+    .catch((msg) => { console.log(msg) })
+
+
 
 /* inicia la cantidad del carrito */
 cartQuantity.innerText = shopCart.length
@@ -62,6 +76,6 @@ window.addEventListener("click", function (event) {
 
 //si el usuario hace click en el boton de comprar, hace la compra, elimina el carrito del localstorage y cierra el modal
 const buyBtn = document.getElementById("buyBtn");
-buyBtn.addEventListener("click", function() {
+buyBtn.addEventListener("click", function () {
     finishBuying();
 })

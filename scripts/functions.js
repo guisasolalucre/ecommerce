@@ -1,3 +1,4 @@
+
 /*---------------------------------------------------------------------------------------*/
 // FUNCIONES QUE MUESTRAN COSAS EN EL HTML
 
@@ -10,7 +11,7 @@ function showProducts(list) {
 
     divProdHTML.innerHTML = `<div class="row row-cols-4" id="prodList"></div>`
 
-    const prodListHTML = document.getElementById("prodList")    
+    const prodListHTML = document.getElementById("prodList")
 
     prodListHTML.innerHTML = ""
     for (const product of list) {
@@ -18,7 +19,7 @@ function showProducts(list) {
 
         container.innerHTML =
             `<div class="card prodCard" style="width: 18rem;">
-            <img src="images/${product.picture}.jpg" class="card-img-top" alt="${product.name}">
+            <img src="${product.picture}" class="card-img-top" alt="${product.name}">
             <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">${product.description}</p>
@@ -105,33 +106,28 @@ function getCategories(list) {
 }
 
 /* transforma los objetos literales en objetos producto */
-function literalToProduct(list) {
-    const newList = []
+function literalToProduct(literal) {
 
-    for (const literal of list) {
-        let id = literal.id
-        let name = literal.name
-        let price = literal.price
-        let description = literal.description
-        let categorie = literal.categorie;
-        let picture = literal.picture;
-        let stock = literal.stock;
-        let quantity = literal.quantity;
+    let id = literal.id
+    let name = literal.name
+    let price = literal.price
+    let description = literal.description
+    let categorie = literal.categorie;
+    let picture = literal.picture;
+    let stock = literal.stock;
+    let quantity = literal.quantity;
 
-
-        newList.push(new Product(id, name, price, description, categorie, picture, stock, quantity))
-    }
-    return newList
+    return new Product(id, name, price, description, categorie, picture, stock, quantity)
 }
 
 /* checkear si el producto tiene stock */
-function checkStock(prod, prodInCart) {
+function checkStock(p) {
 
-    if (prod.stock > 0 && (prodInCart.quantity < prod.stock)) {
+    if (p.quantity < p.stock) {
         return true
     } else {
         Toastify({
-            text: `No hay suficiente stock\nNo se pudo agregar '${prod.name}' al carrito`,
+            text: `No hay suficiente stock\nNo se pudo agregar '${p.name}' al carrito`,
             duration: 2000,
             close: true,
             gravity: "bottom",
@@ -163,7 +159,11 @@ function toastAddedToCart(name) {
 /* trae el carrito del localstorage */
 function getCart() {
     if ("ShopCart" in localStorage) {
-        return literalToProduct(JSON.parse(localStorage.getItem("ShopCart")))
+        let JSONcart = JSON.parse(localStorage.getItem("ShopCart"));
+        JSONcart.forEach(literal => {
+            literalToProduct(literal)
+        });
+        return JSONcart;
     } else {
         return []
     }
@@ -192,10 +192,10 @@ function showCart() {
 
             divProd.innerHTML += `  <div class="divProdCart">
                                 <div>
-                                    <img src="images/${prod.picture}.jpg" alt="${prod.picture}">
+                                    <img src="${prod.picture}" alt="${prod.name}">
                                 </div>
 
-                                <div>
+                                <div class="prodInCartDetail">
                                     <p><strong>${prod.name}</strong></p>
                                     <p>Cantidad: ${prod.quantity}</p> 
                                     <p>Precio: $${prod.price}</p>
@@ -231,16 +231,14 @@ function addToCart(id) {
 
     if (shopCart.some((p) => p.id === prod.id)) {
         prodInCart = findById(id, shopCart)
-        if (checkStock(prod, prodInCart)) {
+        if (checkStock(prodInCart)) {
             prodInCart.quantity++,
                 toastAddedToCart(prod.name)
         }
     } else {
-        prodInCart = { ...prod }
-        prodInCart.quantity++
-        console.log(prod)
-        console.log(prodInCart)
-        if (checkStock(prod, prodInCart)) {
+        if (checkStock(prod)) {
+            prodInCart = literalToProduct({ ...prod })
+            prodInCart.quantity++
             shopCart.push(prodInCart),
                 toastAddedToCart(prod.name)
         }
@@ -332,7 +330,7 @@ function finishBuying() {
             title: 'Gracias por tu compra!',
             showConfirmButton: false,
             timer: 2000
-        })
+        });
 
         cartModalHTML.style.display = "none";
 

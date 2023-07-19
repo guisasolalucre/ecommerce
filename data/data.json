@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "Crema para manos",
+        "price": 2000,
+        "description": "Buena para las manos",
+        "categorie": "Corporales",
+        "picture": "https://farmacityar.vteximg.com.br/arquivos/ids/183293-600-600/26280_crema-suavizante-para-manos-hidratante-x-120-gr_imagen-1.jpg?v=636832606441070000",
+        "stock": 1,
+        "quantity": 0
+    },
+    {
+        "id": 2,
+        "name": "Crema para los bigotes",
+        "price": 1500,
+        "description": "No te afeites como Maria Becerra",
+        "categorie": "Depilatorias",
+        "picture": "https://http2.mlstatic.com/D_NQ_NP_2X_704656-MLA43360932397_092020-F.webp",
+        "stock": 3,
+        "quantity": 0
+    },
+    {
+        "id": 3,
+        "name": "Crema para la cara",
+        "price": 2500,
+        "description": "Para pieles sensibles",
+        "categorie": "Faciales",
+        "picture": "https://farmacityar.vteximg.com.br/arquivos/ids/237174-600-600/156797_crema-facial-nivea-cuidado-nutritivo-x-100-ml_imagen-1_.jpg?v=638119082005070000",
+        "stock": 2,
+        "quantity": 0
+    },
+    {
+        "id": 4,
+        "name": "Crema para cabello seco",
+        "price": 5000,
+        "description": "Adios al cabello quebradizo",
+        "categorie": "Capilares",
+        "picture": "https://http2.mlstatic.com/D_NQ_NP_2X_773973-MLA54897489001_042023-F.webp",
+        "stock": 2,
+        "quantity": 0
+    },
+    {
+        "id": 5,
+        "name": "Crema corporal de coco",
+        "price": 3000,
+        "description": "Ideal para el invierno",
+        "categorie": "Corporales",
+        "picture": "https://farmacityar.vteximg.com.br/arquivos/ids/214675-600-600/223689_crema-corporal-jergens-coco-hidratante-x-400-ml_imagen-1.jpg?v=637666409688470000",
+        "stock": 2,
+        "quantity": 0
+    }
+]

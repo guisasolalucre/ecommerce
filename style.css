@@ -1,9 +1,18 @@
 body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+#content{
     margin-top: 7%;
+    width: 100%;
+    min-height: calc(100vh - 200px);
 }
 
 a {
     cursor: pointer;
+    color: black;
 }
 
 #shopCart {
@@ -94,7 +103,6 @@ a {
     height: 95px;
     width: 95px;
     object-fit: cover;
-    margin-right: -80px;
 }
 
 .prodCartBtn {
@@ -107,6 +115,11 @@ a {
     font-size: medium;
 }
 
+.prodInCartDetail{
+    position: absolute;
+    margin-left: 115px;
+}
+
 #cartTotal {
     display: flex;
     align-items: center;
@@ -115,8 +128,7 @@ a {
     padding: 0px 40px 0px 40px;
 }
 
-#cartTotal p,
-.modal-title {
+#cartTotal p, .modal-title {
     font-size: larger;
 }
 
@@ -127,8 +139,4 @@ a {
     justify-content: space-between;
     margin: auto;
     margin-top: -1%;
-}
-
-a{
-    color: black;
 }
